@@ -4,33 +4,27 @@ import React, { Component } from "react";
 import GraphicsInfo from "./components/GraphicsInfo";
 import CpuInfo from "./components/CpuInfo";
 import PieChart from "./components/PieChart";
-
-//Logo
-import CpuIcon from "../assests/image/cpu.png";
-//import LineChart from "./pages/LineChart";
+import Navbar from "./components/Navbar";
+import DiskInfo from "./components/DiskInfo";
 
 class SystemInfo extends Component {
   cpuloadTemp = [];
   constructor(props) {
     super(props);
     this.fetcMemoryUsage = this.fetcMemoryUsage.bind(this);
-    this.fetchProcess = this.fetchProcess.bind(this);
-    this.fetchCpuLoad = this.fetchCpuLoad.bind(this);
+
     this.state = {
-      customers: [],
       graphics: [],
       cpu: [],
       memory: [],
-      cpuLoad: []
+      disk: []
     };
   }
   componentDidMount() {
     //every 3 seconds recall methods and updates the datas
     this.ıntervalId = setInterval(() => this.fetcMemoryUsage(), 2000);
-    //this.ıntervalId = setInterval(() => this.fetchCpuLoad(), 2000);
-    //this.ıntervalId = setInterval(() => this.fetchProcess(), 3000);
-    //Cpu ınformation
 
+    //Cpu ınformation
     fetch("/api/cpu")
       .then(res => res.json())
       .then(cpu => {
@@ -46,20 +40,16 @@ class SystemInfo extends Component {
         this.setState({ graphics }, () =>
           console.log("Graphics info fetched...", graphics)
         );
+      }); //Disk information
+    fetch("/api/disk")
+      .then(res => res.json())
+      .then(disk => {
+        this.setState({ disk }, () =>
+          console.log("Disk info fetched...", disk)
+        );
       });
   }
 
-  //Fetchs cpuload
-  fetchCpuLoad = () => {
-    fetch("/api/currentLoad")
-      .then(res => res.json())
-      .then(data => {
-        this.cpuloadTemp.push(data.currentload);
-      });
-    this.setState({
-      cpuLoad: this.cpuloadTemp
-    });
-  };
   //Fetchs memory usage
   fetcMemoryUsage = () => {
     fetch("/api/mem")
@@ -70,27 +60,11 @@ class SystemInfo extends Component {
         );
       });
   };
-  //Working Services on pc
-  fetchProcess = () => {
-    fetch("/api/process")
-      .then(res => res.json())
-      .then(process => {
-        this.setState({ process }, () =>
-          console.log("Process fetched...", process)
-        );
-      });
-  };
 
   render() {
     return (
       <div>
-        <nav className="navbar navbar-success bg-success bg-lg text-white">
-          <img src={CpuIcon} alt="" />
-          <a href="/lineChart">Cpu Kullanımı</a>
-          <div className="row align-items-right">
-            <div className="col"></div>
-          </div>
-        </nav>
+        <Navbar />
         <div className="row">
           <div className="col-md-2 mt-2 ml-2">
             <CpuInfo
@@ -115,6 +89,9 @@ class SystemInfo extends Component {
         <div className="row">
           <div className="col-md-2 ml-2">
             <GraphicsInfo data={this.state.graphics} />
+          </div>
+          <div className="col-md-2 mt-2">
+            <DiskInfo data={this.state.disk} />
           </div>
         </div>
       </div>

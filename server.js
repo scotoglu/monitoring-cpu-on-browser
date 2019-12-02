@@ -5,6 +5,18 @@ const info = require("systeminformation");
 //initialize the express
 const app = express();
 
+//gets disk ınformation
+app.get("/api/disk", (req, res) => {
+  info
+    .diskLayout()
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+//gets current cpu usage
 app.get("/api/currentLoad", (req, res) => {
   info
     .currentLoad()

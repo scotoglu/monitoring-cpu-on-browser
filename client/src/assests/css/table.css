@@ -1,0 +1,18 @@
+table {
+  width: 400px;
+}
+
+table tbody {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  height: 600px;
+}
+
+table tr {
+  display: block;
+}
+
+table th {
+  width: 200px;
+}
