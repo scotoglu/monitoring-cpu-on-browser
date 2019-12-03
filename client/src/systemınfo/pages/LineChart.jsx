@@ -58,7 +58,7 @@ class LineChart extends Component {
       <div>
         <Navbar />
         <div className="container">
-          <div className="row ">
+          <div className="row justify-content-center">
             <div className="col-md-3 mt-2 mr-2">
               <table
                 className="table table-striped"
