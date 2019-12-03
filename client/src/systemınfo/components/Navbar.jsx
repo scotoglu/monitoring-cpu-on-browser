@@ -20,6 +20,11 @@ const Navbar = () => {
               Servisler
             </a>
           </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/memory">
+              Hafıza Kullanımı
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

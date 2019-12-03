@@ -1,4 +1,6 @@
 import React from "react";
+
+//bootstrap
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const GraphicsInfo = props => {

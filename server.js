@@ -5,6 +5,7 @@ const info = require("systeminformation");
 //initialize the express
 const app = express();
 
+/*All requests for client-side. */
 //gets disk ınformation
 app.get("/api/disk", (req, res) => {
   info
@@ -16,6 +17,7 @@ app.get("/api/disk", (req, res) => {
       res.json(err);
     });
 });
+
 //gets current cpu usage
 app.get("/api/currentLoad", (req, res) => {
   info
@@ -36,20 +38,6 @@ app.get("/api/process", (req, res) => {
     .processes()
     .then(data => {
       res.json(data.list);
-    })
-    .catch(err => {
-      err => {
-        res.json(err);
-      };
-    });
-});
-
-//gets battery information
-app.get("/api/battery", (req, res) => {
-  info
-    .battery()
-    .then(data => {
-      res.json(data);
     })
     .catch(err => {
       err => {
@@ -107,6 +95,7 @@ app.get("/api/mem", (req, res) => {
       res.json(err);
     });
 });
+
 //Which port will be use
 const port = 5000;
 

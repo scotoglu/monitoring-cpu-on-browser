@@ -15,7 +15,7 @@ const DiskInfo = props => {
             <li className="list-group-item">Disk: {data.name}</li>
             <li className="list-group-item">Type: {data.type}</li>
             <li className="list-group-item">
-              Size: {(data.size * 9.31 * 0.000000001).toFixed(2)} GB
+              Size: {(data.size * 9.31 * 0.0000000001).toFixed(2)} GB
             </li>
           </ul>
         ) : (

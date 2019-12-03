@@ -1,5 +1,8 @@
 import * as React from "react";
 import * as d3 from "d3";
+
+//eslint-disable-next-line
+import { VictoryPie } from "victory";
 const calcPercentage = (bytes, total) => {
   return (bytes / total) * 100;
 };
@@ -9,6 +12,11 @@ const PieChart = props => {
   let total = props.total;
   let used = calcPercentage(props.used, total).toFixed(2);
   let free = calcPercentage(props.free, total).toFixed(2);
+
+  // const pieData = [
+  //   { x: free, y: free },
+  //   { x: used, y: used }
+  // ];
 
   const data = [free, used];
   let pie = d3.pie()(data);
@@ -26,6 +34,7 @@ const PieChart = props => {
             <text x={10}>%{free}</text>
           </g>
         </svg>
+        {/* <VictoryPie data={pieData} colorScale={["#eaaf79", "#bc3358"]} /> */}
       </div>
       <div className="card-footer">
         <div className="row">
